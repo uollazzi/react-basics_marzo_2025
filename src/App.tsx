@@ -5,6 +5,7 @@ import Messaggio from "./components/Messaggio";
 import Button from "./components/Button";
 import { FaRegPlusSquare } from "react-icons/fa";
 import Like from "./components/Like";
+import { UpdateLogic } from "./components/UpdateLogic";
 
 function App() {
   const listaDellaSpesa = ["Mele", "Burro", "Uova", "Pistacchi", "Prugne"];
@@ -61,6 +62,8 @@ function App() {
       </Button>
       <hr className="my-4" />
       <Like onStatusChange={(l) => console.log(l ? "Like" : "Dislike")} />
+      <hr className="my-4" />
+      <UpdateLogic />
     </div>
   );
 }
