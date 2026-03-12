@@ -2,6 +2,9 @@ import { useState } from "react";
 import Alert from "./components/Alert";
 import ListGroup from "./components/ListGroup";
 import Messaggio from "./components/Messaggio";
+import Button from "./components/Button";
+import { FaRegPlusSquare } from "react-icons/fa";
+import Like from "./components/Like";
 
 function App() {
   const listaDellaSpesa = ["Mele", "Burro", "Uova", "Pistacchi", "Prugne"];
@@ -48,6 +51,16 @@ function App() {
           <p>Connessione al server fallita</p>
         </Alert>
       )}
+      <hr className="my-4" />
+      <Button color="danger" onClick={() => alert("Ciao!")}>
+        <b>Ciao</b>
+      </Button>
+      <Button color="warning" onClick={() => alert("Ciao!")}>
+        <FaRegPlusSquare size={48} />
+        <b>Ciao</b>
+      </Button>
+      <hr className="my-4" />
+      <Like onStatusChange={(l) => console.log(l ? "Like" : "Dislike")} />
     </div>
   );
 }

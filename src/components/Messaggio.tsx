@@ -1,4 +1,8 @@
+// let count = 0;
+
 function Messaggio() {
+  console.log("Messaggio renderizzato");
+  // count++;
   const nome = "";
 
   if (nome) {
