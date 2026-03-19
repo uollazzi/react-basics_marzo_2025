@@ -1,54 +1,65 @@
-import { useState } from "react";
+import { useForm, type FieldValues } from "react-hook-form";
+
+interface FormData {
+  nome: string;
+  eta: number;
+}
 
 const FormHook = () => {
-  const [persona, setPersona] = useState({ nome: "", eta: 0 });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
 
-  const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log("submitted");
+  console.log(errors);
 
-    console.log(persona);
+  const onSubmit = (data: FieldValues) => {
+    // inviamo i valori al server
+    console.log(data);
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-3">
           <label htmlFor="nome" className="form-label">
             Nome
           </label>
           <input
+            {...register("nome", { required: true, minLength: 3 })}
             id="nome"
             type="text"
             className="form-control"
-            value={persona.nome}
-            onChange={(event) =>
-              setPersona({ ...persona, nome: event.target.value })
-            }
           />
+          {errors.nome?.type == "required" && (
+            <p className="text-danger">Nome obbligatorio</p>
+          )}
+          {errors.nome?.type == "minLength" && (
+            <p className="text-danger">
+              Il nome deve avere almenno 3 caratteri
+            </p>
+          )}
+          {/* {errors.nome && <p className="text-danger">ERRORE nel nome</p>} */}
         </div>
         <div className="mb-3">
           <label htmlFor="eta" className="form-label">
             Età
           </label>
           <input
-            value={persona.eta}
-            onChange={(e) =>
-              setPersona({
-                ...persona,
-                eta: parseInt(e.target.value),
-              })
-            }
+            {...register("eta", { required: true, valueAsNumber: true })}
             id="eta"
-            type="text"
+            type="number"
             className="form-control"
           />
+          {errors.eta?.type == "required" && (
+            <p className="text-danger">Età obbligatoria</p>
+          )}
         </div>
         <button className="btn btn-primary" type="submit">
           Salva
         </button>
       </form>
-      <pre>{JSON.stringify(persona)}</pre>
     </>
   );
 };
