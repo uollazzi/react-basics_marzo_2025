@@ -1,4 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 // import Form from "./components/Form";
 // import FormControlled from "./components/FormControlled";
 // import FormHook from "./components/FormHook";
